@@ -94,6 +94,63 @@ function format8Bit(input) {
     return input;
 }
 
-exports.toBinary = toBinary;
+/** Method encryptMessage(message, password)
+ *  ----------------------------------------
+ *  This method takes in a message and a password as its two arguments,
+ *  and return an encrypted binary string of the message encrypted (via XOR)
+ *  by the password.
+ */
+function encryptMessage(message, password) {
+	/* converts the meessage to binary! */
+	var binString = toBinary(message);
+	/* converts the string password to binary! */
+	var binPass = toBinary(password);
+	/* creates a new string for the binary password */
+	var binPassString = "";
 
+	while (binString.length > binPassString.length) {
+
+		binPassString += String(binPass);
+
+	}
+
+	binPassString.slice(0, binString.length - 1);
+	/*
+	console.log("String: " + binString);
+	console.log(toText(binString));
+	console.log("Passwo: " + binPassString);
+	console.log(toText(binPassString));
+	*/
+
+	var cipherText = xor(binString, binPassString);
+	/*
+	console.log("Cipher: " + cipherText);
+	console.log(toText(cipherText));
+	*/
+
+	return cipherText;
+
+}
+
+/** Method: xor(string1, string2)
+ *  -----------------------------
+ *  This method takes in 2 binary strings of equal lengths, and returns the XOR product of them.
+ *  Very useful for encryption purposes!
+ */
+function xor(s1, s2) {
+	var s3 = "";
+
+	for (var i = 0; i < s1.length; i++) {
+		if (s1.charAt(i) == s2.charAt(i)) {
+			s3 += '0';
+		} else {
+			s3 += '1';
+		}
+	}
+
+	return s3;
+}
+
+exports.toBinary = toBinary;
 exports.toText = toText;
+exports.encryptMessage = encryptMessage;
