@@ -1,6 +1,11 @@
-var express = require('express');
+var express = require('express')
+	, path = require('path');
 
 var app = express.createServer(express.logger());
+
+app.configure(function(){
+	app.use(express.static(path.join(__dirname + '/assets')));
+});
 
 app.get('/', function(request, response) {
   response.sendfile('index.html');
