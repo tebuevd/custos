@@ -264,11 +264,11 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="/ico/favicon.png">
   </head>
 
   <body>
@@ -298,13 +298,13 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Encrypt</a></li>
-                    <li><a href="#">Decrypt</a></li>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#encrypt">Encrypt</a></li>
+                    <li><a href="#decrypt">Decrypt</a></li>
+                    <!-- <li><a href="#facebook">Facebook</a></li> -->
                     <li class="divider"></li>
                     <li class="nav-header">Steganography info</li>
-                    <li><a href="#">Wikipedia article</a></li>
-                    <li><a href="#">Other tools</a></li>
+                    <li><a href="http://en.wikipedia.org/wiki/Steganography">Wikipedia article</a></li>
+                    <!-- <li><a href="#">Other tools</a></li> -->
                   </ul>
                 </li>
                 <li><a href="#about-featurette">About</a></li>
@@ -393,25 +393,30 @@
 
       <hr class="featurette-divider">
 
-      <div class="featurette" id="about-featurette">
+      <div class="featurette" id="encrypt">
         <img class="featurette-image pull-right" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-chrome.png">
-        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
+        <h2 class="featurette-heading">Encrypt your secret message! <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <form>
+          <table>
+            <input type='text' size='20'>
+          </table>
+        </form>
       </div>
 
       <hr class="featurette-divider">
 
-      <div class="featurette">
+      <div class="featurette" id="decrypt">
         <img class="featurette-image pull-left" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-firefox.png">
-        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <h2 class="featurette-heading">Have an image? Decrypt it!fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, t <span class="muted">See for yourself.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor ellus ac cursus commodo.</p>
       </div>
 
       <hr class="featurette-divider">
 
-      <div class="featurette">
+      <div class="featurette" id="about-featurette">
         <img class="featurette-image pull-right" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-safari.png">
-        <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
+        <h2 class="featurette-heading">What we're all about ;-) <span class="muted">Checkmate.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
 
@@ -454,6 +459,6 @@
         })
       }(window.jQuery)
     </script>
-    <script src="/js/holder/holder.js"></script>
+    <!-- DONT KNOW WHAT THIS DOES <script src="/js/holder/holder.js"></script> -->
   </body>
 </html>
