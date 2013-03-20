@@ -330,20 +330,22 @@
       <div class="featurette" id="encrypt">
         <img class="featurette-image pull-right" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-chrome.png">
         <h2 class="featurette-heading">Encrypt your secret message! <span class="muted">It'll blow your mind.</span></h2>
-        <form class="form-horizontal">
+
+        <!-- FORM STARTS HERE -->
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="upload">
           <div class="control-group">
             <label class="control-label" for="secretMessage">Secret Message: </label>
             <div class="controls">
-              <input type="text" id="secretMessage" placeholder="type your message...">
+              <input type="text" name="secretMessage" id="secretMessage" placeholder="type your message...">
             </div>
             <br>
             <label class="control-label" for="secretPassword">Secret Password: </label>
             <div class="controls">
-              <input type="password" id="secretPassword" placeholder="set a password">
+              <input type="password" name="secretPassword" id="secretPassword" placeholder="set a password">
             </div>
             <br>
             <div class="controls">
-              <input type="file" name="pic" accept="image/*">
+              <input type="file" name="pic" accept="image/png">
             </div>
             <div class="controls">
               <button type="submit" class="btn btn-primary">Encrypt!</button>
@@ -357,15 +359,15 @@
       <div class="featurette" id="decrypt">
         <img class="featurette-image pull-right" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-firefox.png">
         <h2 class="featurette-heading">Have an image? Decrypt it! <span class="muted">See for yourself.</span></h2>
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="decrypt">
           <div class="control-group">
             <label class="control-label" for="secretPassword">Secret Password: </label>
             <div class="controls">
-              <input type="password" id="secretPassword" placeholder="enter the secret password">
+              <input type="password" id="secretPassword" placeholder="enter the secret password" name="secretPassword">
             </div>
             <br>
             <div class="controls">
-              <input type="file" name="pic" accept="image/*">
+              <input type="file" name="pic" accept="image/png">
             </div>
             <div class="controls">
               <button type="submit" class="btn btn-primary">Decrypt!</button>

@@ -132,6 +132,31 @@ function encryptMessage(message, password) {
 
 }
 
+/** Method: decryptMessage(message, password)
+ *  --------------------------------------------
+ *  This method takes in an encrypted string and its password, decrypts and returns the decrypted message.
+ *  The encryption is assumed to be via XOR.
+ */
+function decryptMessage(msg, pass) {
+
+	pass = toBinary(pass);
+
+	var binPassString = "";
+
+	while (msg.length > binPassString.length) {
+
+		binPassString += String(pass);
+
+	}
+
+	binPassString.slice(0, msg.length - 1);
+
+	var decipher = xor(msg, binPassString);
+
+	return toText(decipher);
+    
+}
+
 /** Method: xor(string1, string2)
  *  -----------------------------
  *  This method takes in 2 binary strings of equal lengths, and returns the XOR product of them.
@@ -154,3 +179,4 @@ function xor(s1, s2) {
 exports.toBinary = toBinary;
 exports.toText = toText;
 exports.encryptMessage = encryptMessage;
+exports.decryptMessage = decryptMessage;
