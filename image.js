@@ -62,7 +62,7 @@ function encodeMessage(image, mes, cb) {
 				}			       
 			}
 		}
-		this.pack().pipe(fs.createWriteStream(image + '_encoded.png'));
+		this.pack().pipe(fs.createWriteStream(image));// + '_encoded.png'));
 
 		cb();
 	});

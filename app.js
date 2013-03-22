@@ -39,6 +39,14 @@ app.post('/upload', function(req, res, next) {
     var secretPassword = req.body.secretPassword;
     var cipherText = message.encryptMessage(secretMessage, secretPassword);
 
+    image.encodeMessage(tmp_path, cipherText, function() {
+          
+          //console.log(encoded_path);
+          var body = '<a href=\"' + tmp_path + '\">Click here for the image</a>';
+          res.send(body);
+          
+        });
+/*
     fs.rename(tmp_path, target_path, function(err) {
       if (err) throw err;
 
@@ -54,6 +62,7 @@ app.post('/upload', function(req, res, next) {
         })
       })
     })
+*/
 });
 
 app.post('/decrypt', function(req, res, next) {
