@@ -29,6 +29,14 @@ app.get('/', function(req, res) {
 	res.sendfile('index.html');
     });
 
+app.get('/tmp/:file(*)', function(req, res, next){
+  var file = req.params.file
+    , path = '/tmp/' + file;
+  console.log(file);
+  console.log(path);
+  res.download(path);
+});
+
 app.post('/upload', function(req, res, next) {
     //console.log(req.body);
     //console.log(req.files);
