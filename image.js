@@ -50,9 +50,9 @@ function encodeMessage(image, mes, cb) {
 				} else if (idx === message.length) {
 					
 				    /* do something to the first pixel following the end of the string */
-				    this.data[idx] = 69;
-				    this.data[idx+1] = 69;
-				    this.data[idx+2] = 69;
+				    this.data[idx] = 68;
+				    this.data[idx+1] = 68;
+				    this.data[idx+2] = 68;
 				    
 				    
 				} else {
@@ -89,9 +89,9 @@ function decodeMessage(image, cb) {
 		for (var y = 0; y < this.height; y++) {
 			for (var x = 0; x < this.width; x++) {
 
-				var idx = (this.width * y + x);// << 2;
+				var idx = (this.width * y + x);
 
-				if (this.data[idx] == 69 && this.data[idx+1] == 69 && this.data[idx+2] == 69) {
+				if (this.data[idx] == 68 && this.data[idx+1] == 68 && this.data[idx+2] == 68) {
 					break dance;
 				} else {
 

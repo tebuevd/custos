@@ -59,16 +59,12 @@
   /* takes care of the encoding and returns a file download */
   image.encodeMessage(tmp_path, cipherText, function() {
 
-          //res.setHeader("Content-Disposition", "attachment; filename=encodedImage.png");
-          //res.download(tmp_path);
-          /* var body = '<a href=\"' + tmp_path + '\">Click here for the image</a>';
-          res.send(body); */
           var end_path = '/tmp/encoded.png';
 
           fs.rename(tmp_path, end_path, function (err) {
             if (err) throw (err);
 
-            var body = '<a href=\"' + end_path + '\">Click here for the image</a>';
+            var body = '<span>Click <a href=\"' + end_path + '\">here</a> for the image</span>';
             res.send(body); 
           });
         });
