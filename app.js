@@ -1,19 +1,22 @@
-
-/**
- * Module dependencies.
+/** File: app.js
+ *  -----------------------------
+ *  This is the server built with
+ *  express.
  */
 
-var express = require('express')
-  , http = require('http')
-  , path = require('path');
+/* Module dependencies */
+ var express = require('express')
+ , http = require('http')
+ , path = require('path');
 
-var app = express();
+ var app = express();
 
-var fs = require('fs');
-var message = require('./message.js');
-var image = require('./image.js');
+ var fs = require('fs');
+ var message = require('./message.js');
+ var image = require('./image.js');
 
-app.configure(function(){
+/* Express config */
+ app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -25,79 +28,73 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.get('/', function(req, res) {
-	res.sendfile('index.html');
-    });
+/* Sends the index.html file */
+ app.get('/', function(req, res) {
+   res.sendfile('index.html');
+ });
 
-app.get('/tmp/:file(*)', function(req, res, next){
+/* Takes care of downloading files from cache/tmp folder.
+ * This is useful as heroku doesn't permit permanent storage,
+ * but allows for temporary files to be stored on the server.
+ * For permanent storage Amazon S3 would have to be used.
+ */
+ app.get('/tmp/:file(*)', function(req, res, next){
   var file = req.params.file
-    , path = '/tmp/' + file;
-  console.log(file);
-  console.log(path);
+  , path = '/tmp/' + file;
+
   res.download(path);
 });
 
-app.post('/upload', function(req, res, next) {
-    //console.log(req.body);
-    //console.log(req.files);
-    var tmp_path = req.files.pic.path;
-    var target_path = './public/img/' + req.files.pic.name;
-    var encoded_path = '/img/' + req.files.pic.name + '_encoded.png';
-    var secretMessage = req.body.secretMessage;
-    var secretPassword = req.body.secretPassword;
-    var cipherText = message.encryptMessage(secretMessage, secretPassword);
+/* takes care of the encryption process */
+ app.post('/encrypt', function(req, res, next) {
 
-    image.encodeMessage(tmp_path, cipherText, function() {
-          
-          //console.log(encoded_path);
-          var body = '<a href=\"' + tmp_path + '\">Click here for the image</a>';
-          res.send(body);
-          
+  /* the path to the file */
+  var tmp_path = req.files.pic.path;
+  /* retreives input from the form */
+  var secretMessage = req.body.secretMessage;
+  var secretPassword = req.body.secretPassword;
+  /* creates the cipher text */
+  var cipherText = message.encryptMessage(secretMessage, secretPassword);
+
+  /* takes care of the encoding and returns a file download */
+  image.encodeMessage(tmp_path, cipherText, function() {
+
+          //res.setHeader("Content-Disposition", "attachment; filename=encodedImage.png");
+          //res.download(tmp_path);
+          /* var body = '<a href=\"' + tmp_path + '\">Click here for the image</a>';
+          res.send(body); */
+          var end_path = '/tmp/encoded.png';
+
+          fs.rename(tmp_path, end_path, function (err) {
+            if (err) throw (err);
+
+            var body = '<a href=\"' + end_path + '\">Click here for the image</a>';
+            res.send(body); 
+          });
         });
-/*
-    fs.rename(tmp_path, target_path, function(err) {
-      if (err) throw err;
 
-      fs.unlink(tmp_path, function() {
-        if (err) throw err;
-
-        image.encodeMessage(target_path, cipherText, function() {
-          
-          console.log(encoded_path);
-          var body = '<a href=\"' + encoded_path + '\">Click here for the image</a>';
-          res.send(body);
-          fs.unlink(target_path);
-        })
-      })
-    })
-*/
 });
 
+/* takes care of the decryption process */
 app.post('/decrypt', function(req, res, next) {
-    //console.log(req.body);
-    //console.log(req.files);
+    
+    /* file path */
     var tmp_path = req.files.pic.path;
-    var target_path = './public/img/' + req.files.pic.name;
+    /* retrieves password from form */
     var secretPassword = req.body.secretPassword;
-    var cipherText = "";
 
-    fs.rename(tmp_path, target_path, function(err) {
-      if (err) throw err;
+    /* takes out the string from file, decrypts it, then outputs it */
+    image.decodeMessage(tmp_path, function(msg) {
 
-      fs.unlink(tmp_path, function() {
-        if (err) throw err;
-
-        image.decodeMessage(target_path, function(msg) {
-          if (err) throw err;
-          msg = message.decryptMessage(msg, secretPassword);
-          res.send(msg);
-          fs.unlink(target_path);
-        });
-      });
+      msg = message.decryptMessage(msg, secretPassword);
+      res.send(msg);
+      
     });
+
 });
 
+/* port config */
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
 	console.log("Listening on " + port);
-    });
+});

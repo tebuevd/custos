@@ -10,6 +10,36 @@
   <!-- Le styles -->
   <link href="/css/bootstrap.css" rel="stylesheet">
   <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+
+  <!-- Form completeness -->
+  <script>
+  function ValidateContactForm()
+  {
+    var secretMessage = document.ContactForm.secretMessage;
+    var secretPassword = document.ContactForm.secretPassword;
+    var pic = document.ContactForm.pic;
+
+    if (pic.value == "")
+    {
+      window.alert("Please choose a valid .png image");
+      pic.focus();
+      return false;
+    }
+    if (secretPassword.value == "")
+    {
+      window.alert("Please enter a secret password!");
+      secretPassword.focus();
+      return false;
+    }
+    if (secretMessage.value == "")
+    {
+      window.alert("Please enter a secret message!");
+      secretMessage.focus();
+      return false;
+    }
+    return true;
+  }
+  </script>
   <style>
 
     /* GLOBAL STYLES
@@ -258,20 +288,9 @@
     }
     </style>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-      <![endif]-->
+  </head>
 
-      <!-- Fav and touch icons -->
-      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
-      <link rel="shortcut icon" href="/ico/favicon.png">
-    </head>
-
-    <body>
+  <body>
 
 
 
@@ -308,7 +327,7 @@
                   </ul>
                 </li>
                 <li><a href="#about-featurette">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#aboutme">Contact</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
@@ -324,15 +343,28 @@
     <div class="container marketing">
 
       <!-- START THE FEATURETTES -->
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="about-featurette">
+
+        <h2 class="featurette-heading">How it works:</h2>
+        <ol>
+          <li>Choose a PNG image file</li>
+          <li>Pick your secret message and password</li>
+          <li>Fill in this <a href='#encrypt'>form</a> to get your encrypted image</li>
+          <li>Upload to facebook in high quality to preserve the secret message!</li>
+          <li>Have and image and password? Decrypt it <a href='#decrypt'>here</a>!</li>
+        </ol>
+      </div>
 
       <hr class="featurette-divider">
 
       <div class="featurette" id="encrypt">
-        <img class="featurette-image pull-right" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-chrome.png">
-        <h2 class="featurette-heading">Encrypt your secret message! <span class="muted">It'll blow your mind.</span></h2>
+
+        <h2 class="featurette-heading">Encrypt your secret message!</h2>
 
         <!-- FORM STARTS HERE -->
-        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="upload">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="encrypt" name="ContactForm" onsubmit="return ValidateContactForm();">
           <div class="control-group">
             <label class="control-label" for="secretMessage">Secret Message: </label>
             <div class="controls">
@@ -357,8 +389,8 @@
       <hr class="featurette-divider">
 
       <div class="featurette" id="decrypt">
-        <img class="featurette-image pull-right" src="http://twitter.github.com/bootstrap/assets/img/examples/browser-icon-firefox.png">
-        <h2 class="featurette-heading">Have an image? Decrypt it! <span class="muted">See for yourself.</span></h2>
+
+        <h2 class="featurette-heading">Have an image? Decrypt it!</h2>
         <form class="form-horizontal" method="post" enctype="multipart/form-data" action="decrypt">
           <div class="control-group">
             <label class="control-label" for="secretPassword">Secret Password: </label>
@@ -376,15 +408,7 @@
         </form>
       </div>
 
-      <hr class="featurette-divider">
-
-      <div class="featurette" id="about-featurette">
-        <img class="featurette-image img-circle pull-left" src="https://si0.twimg.com/profile_images/2325663933/image.jpg">
-        <h2 class="featurette-heading">Dinislam Tebuev. <span class="muted">The creator.</span></h2>
-        <p class="lead">I'm a computer science student at Stanford University, interested in systems and security!</p>
-      </div>
-
-      <hr class="featurette-divider">
+      <hr class="featurette-divider"
 
       <!-- /END THE FEATURETTES -->
 
@@ -392,7 +416,7 @@
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2013 Dinislam Tebuev &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2013 <a href='http://twitter.com/tebuevd' id="aboutme">Dinislam Tebuev</a> &middot; <a href="#about-featurette">Privacy</a> &middot; <a href="#about-featurette">Terms</a></p>
       </footer>
 
     </div><!-- /.container -->

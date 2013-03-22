@@ -176,7 +176,5 @@ function xor(s1, s2) {
 	return s3;
 }
 
-exports.toBinary = toBinary;
-exports.toText = toText;
 exports.encryptMessage = encryptMessage;
 exports.decryptMessage = decryptMessage;
